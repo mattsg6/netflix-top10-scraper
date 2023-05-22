@@ -29,11 +29,13 @@ while(curr_week < finish_week):
     options.add_argument('--headless')
     browser = webdriver.Chrome(service=Service(ChromeDriverManager().install()), options=options)
     browser.get(url)
-    timeout = 10
+    timeout = 30
     WebDriverWait(browser, timeout).until(ec.visibility_of_all_elements_located((By.ID, 'weekly-lists')))
     WebDriverWait(browser, timeout).until(ec.visibility_of_all_elements_located((By.ID, 'global-reach')))
     WebDriverWait(browser, timeout).until(ec.visibility_of_all_elements_located((By.ID, 'top-matter')))
     WebDriverWait(browser, timeout).until(ec.visibility_of_all_elements_located((By.ID, 'maincontent')))
+    WebDriverWait(browser, timeout).until(ec.presence_of_element_located((By.ID, 'share-button')))
+    WebDriverWait(browser, timeout).until(ec.presence_of_element_located((By.ID, 'end-matter')))
     html = browser.page_source 
     content = BeautifulSoup(html, 'html.parser')
 
